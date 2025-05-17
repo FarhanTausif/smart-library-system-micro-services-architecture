@@ -21,7 +21,7 @@ app.get('/health', (req, res) => {
 
 app.use('/api/books', bookRoutes);
 
-const PORT = process.env.PORT || 8082;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Book Service running on port ${PORT}`);
 });
