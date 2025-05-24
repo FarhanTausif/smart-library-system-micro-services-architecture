@@ -20,3 +20,19 @@ export async function updateUserService(id, { name, email }) {
   await user.save();
   return user;
 }
+
+export async function getAllUsersService() {
+  try {
+    const users = await User.find();
+    return users.map(user => ({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      created_at: user.created_at,
+      updated_at: user.updated_at
+    }));
+  } catch (error) {
+    throw new Error('Failed to fetch users');
+  }
+}

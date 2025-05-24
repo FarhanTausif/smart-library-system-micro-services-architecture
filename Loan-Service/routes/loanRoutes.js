@@ -5,7 +5,8 @@ import {
     getUserLoanHistory,
     getLoanDetails,
     getOverdueLoans,
-    extendLoanDueDate } 
+    extendLoanDueDate,
+    getAllLoans } 
 from '../services/loanService.js';
 
 const router = express.Router();
@@ -75,6 +76,16 @@ router.put('/loans/:id/extend', async (req, res) => {
       return res.status(400).json({ error: 'Maximum extensions reached' });
     }
     res.status(200).json(extendedLoan);
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message });
+  }
+});
+
+// GET /api/loans - Get all loans
+router.get('/loans', async (req, res) => {
+  try {
+    const loans = await getAllLoans();
+    res.status(200).json(loans);
   } catch (error) {
     res.status(error.status || 500).json({ message: error.message });
   }
