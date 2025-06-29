@@ -237,6 +237,8 @@ export async function getAllLoans() {
       extensions_count: loan.extensions_count
     }));
   } catch (error) {
-    throw { status: 500, message: 'Failed to fetch loans' };
+    const error = new Error('Failed to fetch loans');
+    error.status = 500;
+    throw error;
   }
 }
