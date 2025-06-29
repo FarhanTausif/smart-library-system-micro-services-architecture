@@ -69,7 +69,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // GET /api/users - Get all users
-router.get('/api/users', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const users = await getAllUsersService();
     res.status(200).json(users);
