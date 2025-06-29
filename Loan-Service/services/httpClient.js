@@ -1,6 +1,7 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
+
 // Create an HTTP client for User-Service
 export const userServiceClient = axios.create({
   baseURL: process.env.USER_SERVICE_URL || 'http://user-service:8081',

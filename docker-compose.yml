@@ -1,0 +1,56 @@
+services:
+  user-service:
+    build: ./User-Service
+    container_name: user-service
+    ports:
+      - "8081:8081"
+    environment:
+      - MONGO_URI=${USER_MONGO_URI}
+      - PORT=8081
+    networks:
+      - library-network
+    restart: unless-stopped
+
+  book-service:
+    build: ./Book-Service
+    container_name: book-service
+    ports:
+      - "8082:8082"
+    environment:
+      - MONGO_URI=${BOOK_MONGO_URI}
+      - PORT=8082
+    networks:
+      - library-network
+    restart: unless-stopped
+
+  loan-service:
+    build: ./Loan-Service
+    container_name: loan-service
+    ports:
+      - "8083:8083"
+    environment:
+      - MONGO_URI=${LOAN_MONGO_URI}
+      - PORT=8083
+      - BASE_URL=http://localhost
+    networks:
+      - library-network
+    depends_on:
+      - user-service
+      - book-service
+    restart: unless-stopped
+
+  nginx-gateway:
+    build: ./ngnix-config
+    container_name: nginx-gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - library-network
+    depends_on:
+      - user-service
+      - book-service
+      - loan-service
+
+networks:
+  library-network:
+    driver: bridge

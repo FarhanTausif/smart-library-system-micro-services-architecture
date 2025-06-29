@@ -222,3 +222,23 @@ export async function extendLoanDueDate(loan_id, extension_days) {
     throw error;
   }
 }
+
+export async function getAllLoans() {
+  try {
+    const loans = await Loan.find();
+    return loans.map(loan => ({
+      id: loan._id,
+      user_id: loan.user_id,
+      book_id: loan.book_id,
+      issue_date: loan.issue_date,
+      due_date: loan.due_date,
+      return_date: loan.return_date,
+      status: loan.status,
+      extensions_count: loan.extensions_count
+    }));
+  } catch (error) {
+    const error = new Error('Failed to fetch loans');
+    error.status = 500;
+    throw error;
+  }
+}

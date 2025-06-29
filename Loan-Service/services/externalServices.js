@@ -4,8 +4,8 @@ import CircuitBreaker from 'opossum';
 
 dotenv.config();
 
-const USER_SERVICE_URL = process.env.USER_SERVICE_URL || 'http://user-service:8081';
-const BOOK_SERVICE_URL = process.env.BOOK_SERVICE_URL || 'http://book-service:8082';
+const USER_SERVICE_URL = process.env.BASE_URL || 'http://user-service:8081';
+const BOOK_SERVICE_URL = process.env.BASE_URL || 'http://book-service:8082';
 
 // Circuit breaker options
 const circuitBreakerOptions = {

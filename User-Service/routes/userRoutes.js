@@ -2,7 +2,8 @@ import { Router } from 'express';
 import {
   createUserService,
   getUserByIdService,
-  updateUserService
+  updateUserService,
+  getAllUsersService
 } from '../services/userService.js';
 
 const router = Router();
@@ -63,6 +64,16 @@ router.put('/:id', async (req, res) => {
       updated_at: user.updated_at ? user.updated_at.toISOString() : undefined
     });
   } catch {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// GET /api/users - Get all users
+router.get('/', async (req, res) => {
+  try {
+    const users = await getAllUsersService();
+    res.status(200).json(users);
+  } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
 });

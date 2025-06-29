@@ -76,3 +76,20 @@ export async function deleteBookService(id) {
   const result = await Book.deleteOne({ _id: id });
   return result.deletedCount > 0;
 }
+
+export async function getAllBooksService() {
+  try {
+    const books = await Book.find();
+    return books.map(book => ({
+      id: book._id,
+      title: book.title,
+      author: book.author,
+      isbn: book.isbn,
+      copies: book.copies,
+      available_copies: book.available_copies,
+      created_at: book.created_at
+    }));
+  } catch (error) {
+    throw new Error('Failed to fetch books');
+  }
+}
