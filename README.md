@@ -43,6 +43,9 @@ This project is a **Smart Library System** built using a microservices architect
   - `PUT /api/loans/:id/extend`: Extend the due date for a loan.
 - **Database**: `loan_db` (Collection: `loans`)
 
+## Documentation
+- **[Dockerfile Documentation](DOCKERFILE_DOCUMENTATION.md)**: Comprehensive explanation of every line in each Dockerfile used in the microservices architecture.
+
 ## Prerequisites
 - **Node.js**: v16 or later
 - **MongoDB**: A running MongoDB instance or cluster
